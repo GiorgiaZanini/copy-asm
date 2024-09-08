@@ -45,8 +45,7 @@
 
        call salva_numeri
        
-#       call ordinamento_EDF
-       call ordinamento_HPF
+       call ordinamento_EDF
        call elabora_ordini
 
     errore_file:

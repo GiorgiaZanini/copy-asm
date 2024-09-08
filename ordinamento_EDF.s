@@ -3,11 +3,6 @@
     counter_array_ordini: .long 0
     counter_corrente: .long 2   # terza posizione
 
-    ok: .ascii "i numeri sono nell'ordine corretto\n\0"
-    inverti: .ascii "i numeri sono da scambiare\n\0"
-    test: .ascii "sono nel controllo per il bubble\n\0"
-    a_capo: .ascii "\n\0"
-
 .section .text
     .global ordinamento_EDF
     .type ordinamento_EDF, @function
@@ -41,11 +36,6 @@
         jl inverti_numeri
         je confronta_priorita
 
-        pusha
-        leal ok, %eax
-        call stampa_stringa
-        popa
-
         jmp controllo_bubble_sort
 
     confronta_priorita:
@@ -62,11 +52,6 @@
         jle controllo_bubble_sort
 
     inverti_numeri:
-        pusha
-        leal inverti, %eax
-        call stampa_stringa
-        popa
-
         # pusho il secondo ordine nello stack
         addl $1, %edx
         movb (%esi, %edx), %bl
@@ -125,25 +110,12 @@
         # ripristino l'indice dell'array alla terza casella del secondo ordine
         addl $3, %edx
 
-        pusha
-        movl %esi, %eax
-        movl counter_array_ordini, %ecx
-        call stampa_array
-        leal a_capo, %eax
-        call stampa_stringa
-        popa
-
         jmp controllo_bubble_sort  
 
     descrementa_ordini:
         # decrementa di 4 ecx, rimuovendo l'ultimo ordine e resetta edx a 2
         subl $4, %ecx
         movl $2, %edx
-
-        pusha 
-        leal test, %eax
-        call stampa_stringa
-        popa
 
         # continua il ciclo finché ecx non diventa 3
         # sennò salta a fine
