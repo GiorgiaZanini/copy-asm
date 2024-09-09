@@ -3,6 +3,8 @@
     counter_array_ordini: .long 0
     counter_corrente: .long 2   # terza posizione
 
+    a_capo: .ascii "\n\0"
+
 .section .text
     .global ordinamento_EDF
     .type ordinamento_EDF, @function
@@ -48,7 +50,7 @@
         movb (%esi,%edx), %bl    # sposto il terzo numero dell'ordine puntato +1 in ebx
 
         decl %edx
-        cmpb %al, %bl   # confronto i due numeri, se il primo è più piccolo li inverto    
+        cmpb %al, %bl   # confronto i due numeri, se il primo è più grande li inverto    
         jle controllo_bubble_sort
 
     inverti_numeri:
